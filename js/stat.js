@@ -11,13 +11,26 @@ var TEXT_HEIGHT = 20;
 var COLUMN_WIDTH = 40;
 var COLUMN_HEIGHT = 130;
 
+/**
+ * Draw rectangle with its shadow.
+ * @param {object} ctx canvas context
+ * @param {number} x rectangle's starting point by x coordinate
+ * @param {number} y rectangle's starting point by y coordinate
+ * @param {string} color rectangle's fillstyle
+ */
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
+/**
+ * Select max element of array.
+ * @param {Array} arr input array
+ * @return {number} max element
+ */
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
+
   for (var i = 0; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
@@ -26,23 +39,34 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+/**
+ * Draw player level statistics
+ * @param {object} ctx canvas context
+ * @param {string} players array of player's names
+ * @param {number} times player level time
+ */
 window.renderStatistics = function (ctx, players, times) {
+  var maxTime = getMaxElement(times);
+
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
-  var maxTime = getMaxElement(times);
+
   for (var i = 0; i < players.length; i++) {
-    ctx.fillStyle = '#000';
     var barHeight = -COLUMN_HEIGHT * times[i] / maxTime;
+
+    ctx.fillStyle = '#000';
     ctx.fillText(players[i], CLOUD_X + COLUMN_GAP + (COLUMN_GAP + COLUMN_WIDTH) * i, CLOUD_HEIGHT - GAP);
     ctx.fillText(Math.round(times[i]), CLOUD_X + COLUMN_GAP + (COLUMN_GAP + COLUMN_WIDTH) * i, CLOUD_HEIGHT - GAP - TEXT_HEIGHT + barHeight - GAP, COLUMN_WIDTH);
     ctx.font = '16 px, PT Mono';
     ctx.fillText('Ура вы победили!', CLOUD_X + TITLE_GAP, CLOUD_Y + TITLE_GAP);
     ctx.fillText('Список результатов:', CLOUD_X + TITLE_GAP, CLOUD_Y + TITLE_GAP + TEXT_HEIGHT);
+
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'hsl(243, ' + Math.round(Math.random() * 100) + '%, 50%)';
     }
+
     ctx.fillRect(CLOUD_X + COLUMN_GAP + (COLUMN_GAP + COLUMN_WIDTH) * i, CLOUD_HEIGHT - GAP - TEXT_HEIGHT, COLUMN_WIDTH, barHeight);
   }
 };
