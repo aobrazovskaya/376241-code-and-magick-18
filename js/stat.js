@@ -40,6 +40,15 @@ var getMaxElement = function (arr) {
 };
 
 /**
+ * Get random color by changing saturation
+ * @param {object} ctx canvas context
+ * @param {number} valueOfHSLHue numerical value of hue in hsl
+ */
+var getRandomColorBySaturation = function (ctx, valueOfHSLHue) {
+  ctx.fillStyle = 'hsl(' + valueOfHSLHue + ', ' + Math.round(Math.random() * 100) + '%, 50%)';
+};
+
+/**
  * Draw player level statistics
  * @param {object} ctx canvas context
  * @param {string} players array of player's names
@@ -64,7 +73,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = 'hsl(243, ' + Math.round(Math.random() * 100) + '%, 50%)';
+      getRandomColorBySaturation(ctx, 245);
     }
 
     ctx.fillRect(CLOUD_X + COLUMN_GAP + (COLUMN_GAP + COLUMN_WIDTH) * i, CLOUD_HEIGHT - GAP - TEXT_HEIGHT, COLUMN_WIDTH, barHeight);
