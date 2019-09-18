@@ -41,11 +41,11 @@ var getMaxElement = function (arr) {
 
 /**
  * Get random color by changing saturation
- * @param {object} ctx canvas context
  * @param {number} valueOfHSLHue numerical value of hue in hsl
+ * @return {string} hsl final value
  */
-var getRandomColorBySaturation = function (ctx, valueOfHSLHue) {
-  ctx.fillStyle = 'hsl(' + valueOfHSLHue + ', ' + Math.round(Math.random() * 100) + '%, 50%)';
+var getRandomColorBySaturation = function (valueOfHSLHue) {
+  return 'hsl(' + valueOfHSLHue + ', ' + Math.round(Math.random() * 100) + '%, 50%)';
 };
 
 /**
@@ -73,7 +73,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      getRandomColorBySaturation(ctx, 245);
+      ctx.fillStyle = getRandomColorBySaturation(245);
     }
 
     ctx.fillRect(CLOUD_X + COLUMN_GAP + (COLUMN_GAP + COLUMN_WIDTH) * i, CLOUD_HEIGHT - GAP - TEXT_HEIGHT, COLUMN_WIDTH, barHeight);
