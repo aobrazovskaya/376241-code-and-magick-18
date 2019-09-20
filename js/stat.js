@@ -49,6 +49,15 @@ var getRandomColorBySaturation = function (valueOfHSLHue) {
 };
 
 /**
+ * Fill rectangle bar color by name
+ * @param {string} name player name
+ * @return {string} color
+ */
+var getFillColor = function (name) {
+  return name === 'Вы' ? 'rgba(255, 0, 0, 1)' : getRandomColorBySaturation(245);
+};
+
+/**
  * Draw player level statistics
  * @param {object} ctx canvas context
  * @param {string} players array of player's names
@@ -70,11 +79,7 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillText('Ура вы победили!', CLOUD_X + TITLE_GAP, CLOUD_Y + TITLE_GAP);
     ctx.fillText('Список результатов:', CLOUD_X + TITLE_GAP, CLOUD_Y + TITLE_GAP + TEXT_HEIGHT);
 
-    if (players[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = getRandomColorBySaturation(245);
-    }
+    ctx.fillStyle = getFillColor(players[i]);
 
     ctx.fillRect(CLOUD_X + COLUMN_GAP + (COLUMN_GAP + COLUMN_WIDTH) * i, CLOUD_HEIGHT - GAP - TEXT_HEIGHT, COLUMN_WIDTH, barHeight);
   }
