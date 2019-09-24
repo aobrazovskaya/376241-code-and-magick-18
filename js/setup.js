@@ -35,6 +35,11 @@ for (var i = 0; i < 4; i++) {
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
+/**
+ * Drawing a wizard with changing some parameters.
+ * @param {object} wizard wizard object with his information
+ * @return {HTMLElement} create new HTMLElement of wizard
+ */
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
