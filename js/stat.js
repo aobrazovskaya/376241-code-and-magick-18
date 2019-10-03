@@ -49,7 +49,7 @@ var getRandomColorBySaturation = function (valueOfHSLHue) {
 };
 
 /**
- * Fill rectangle bar color by name
+ * Set fill color in bar graph depending on is it you or not
  * @param {string} name player name
  * @return {string} color
  */
